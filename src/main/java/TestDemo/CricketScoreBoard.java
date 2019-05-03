@@ -15,10 +15,16 @@ public class CricketScoreBoard {
 		System.setProperty("webdriver.chrome.driver", "/Users/NaveenKhunteta/Downloads/chromedriver");
 		ChromeOptions co = new ChromeOptions();
 		co.addArguments("--headless");
-		WebDriver driver = new ChromeDriver(co);
-		driver.get(args[0]);
-		//driver.get("http://www.espncricinfo.com/series/8048/scorecard/1178424/royal-challengers-bangalore-vs-rajasthan-royals-49th-match-indian-premier-league-2019");
+		WebDriver driver = new ChromeDriver();
+		//driver.get(args[0]);
+		driver.get("http://www.espncricinfo.com/series/8048/scorecard/1178425/chennai-super-kings-vs-delhi-capitals-50th-match-indian-premier-league-2019");
 
+		
+		if(!driver.findElement(By.xpath("(//div[@class='cell batsmen' and text()='BATSMEN'])[1]")).isDisplayed()){
+			driver.findElement(By.xpath("(//article[@class='sub-module scorecard'])[1]"
+					+ "//a[@role='button' and @class='collapsed']")).click();
+		}
+		
 		List<WebElement> batsMenList = driver
 				.findElements(By.xpath("//div[@class='cell batsmen']//a[@name='&lpos=cricket:game:scorecard:player']"));
 
